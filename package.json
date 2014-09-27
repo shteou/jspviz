@@ -1,0 +1,22 @@
+{
+  "name": "jspviz",
+  "version": "0.0.0",
+  "description": "JavaScript Profile Visualiser - Google CPU profile to DOT utility",
+  "main": "viz.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shteou/jspviz"
+  },
+  "keywords": [
+    "profiler",
+    "DOT"
+  ],
+  "author": "Stewart Platt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shteou/jspviz/issues"
+  }
+}
