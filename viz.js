@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var stdout = process.stdout,
     fs = require('fs'),
     spawn = require('child_process').spawn,
