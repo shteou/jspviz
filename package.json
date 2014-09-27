@@ -18,5 +18,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/shteou/jspviz/issues"
+  },
+  "dependencies": {
+    "nomnom": "~1.8.0"
   }
 }
