@@ -33,8 +33,15 @@ var opts = require('nomnom')
         abbr: 'l',
         default: 30,
         help: "Maximum length of a vertex label (derived from function name)"
+      }).option('treeDirection', {
+        abbr: 't',
+        default: 'TD',
+        help: "Digraph direction, TD (Top-Down) or LR (Left-Right)"
+      }).option('vertexStyle', {
+        abbr: 'v',
+        default: 'ellipse',
+        help: "Vertex style, e.g. ellipse or box, see http://www.graphviz.org/content/node-shapes"
       }).option('debug', {
-        abbr: 'd',
         flag: true,
         help: "Output the generated dot file to stdout"
       }).option('version', {
@@ -73,6 +80,8 @@ console.log("Generating dot file:");
 
 // Generate the dot header with required options
 var dotFile = "digraph cpuprofile {\n";
+dotFile += "  node [shape=" + opts.style + "];";
+dotFile += "  rankdir=" + opts.treeDirection + ";";
 writeGraph(profile.head);
 dotFile += "}";
 
@@ -148,6 +157,6 @@ function writeGraph(node) {
 
   node.children.forEach(function(child) {
     writeGraph(child);
-    writeEdge(node.id, child.id, Math.floor(((child.childHitcount / totalHitcount) * 1000)/10) );
+    writeEdge(node.id, child.id, Math.floor(((child.childHitcount / totalHitcount) * 1000))/10 + "% (" + child.childHitcount + ")");
   });
 }
