@@ -1,6 +1,6 @@
 {
   "name": "jspviz",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "JavaScript Profile Visualiser - Google CPU profile to DOT utility",
   "main": "viz.js",
   "scripts": {
