@@ -54,45 +54,44 @@ var pruneDepth = opts.pruneDepth,
 var profile = JSON.parse(fs.readFileSync(opts.profile));
 var totalHitcount = profile.samples.length;
 
-stdout.write("Found " + totalHitcount + " samples\n");
+console.log("Found " + totalHitcount + " samples");
 
 // Calculate the cumulative hitcount for all nodes
 // Do any pruning while we're at it
-stdout.write("Calculating callee hit counts:\n");
+console.log("Calculating callee hit counts:");
 var pruned = calculateCumulativeHitcount(profile.head, 0);
-stdout.write("\tPruned " + pruned + " small nodes\n");
-stdout.write("\tComplete\n");
+console.log("\tPruned " + pruned + " small nodes");
+console.log("\tComplete");
 // End stats collection
 
 
 
 // Start Dot Generation
-stdout.write("Generating dot file:\n");
+console.log("Generating dot file:");
 
 // Generate the dot header with required options
 var dotFile = "digraph cpuprofile {\n";
 writeGraph(profile.head);
 dotFile += "}";
 
-stdout.write("\tComplete\n");
+console.log("\tComplete");
 // End Dot Generation
 
 if(opts.debug) {
-  stdout.write(dotFile);
+  console.log(dotFile);
 }
 
 // Generate output file with dot
-stdout.write("Generating output file:\n");
-// stdout.write(opts.outformat + "|" + opts.outfile);
-var dot = spawn('dot', ['-T' + opts.format, "-o " + opts.output]);
+console.log("Generating output file:");
+var dot = spawn('dot', ['-T' + opts.format, "-o", opts.output]);
 dot.stdin.write(dotFile);
 dot.stdin.end();
 
 dot.on('close', function(code) {
   if(code === 0) {
-    stdout.write("\tComplete\n");
+    console.log("\tComplete");
   } else {
-    stdout.write("\tFailed (" + code + ")\n");
+    console.log("\tFailed (" + code + ")");
   }
 });
 
@@ -135,7 +134,7 @@ function calculateCumulativeHitcount(node, level) {
     } else if (child.functionName === '(idle)' || child.functionName === '(program)') {
       node.children.splice(i, 1);
       totalHitcount -= child.hitCount;
-      stdout.write("\tPruning " + child.hitCount + " samples for " + child.functionName + "\n");
+      console.log("\tPruning " + child.hitCount + " samples for " + child.functionName + "");
     }
   };
 
