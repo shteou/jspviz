@@ -45,7 +45,6 @@ var opts = require('nomnom')
         flag: true,
         help: "Output the generated dot file to stdout"
       }).option('version', {
-        abbr: 'v',
         flag: true,
         callback: function() {
           return "Version " + package.version;
@@ -80,8 +79,8 @@ console.log("Generating dot file:");
 
 // Generate the dot header with required options
 var dotFile = "digraph cpuprofile {\n";
-dotFile += "  node [shape=" + opts.style + "];";
-dotFile += "  rankdir=" + opts.treeDirection + ";";
+dotFile += "  node [shape=" + opts.vertexStyle + "];\n";
+dotFile += "  rankdir=" + opts.treeDirection + ";\n";
 writeGraph(profile.head);
 dotFile += "}";
 
